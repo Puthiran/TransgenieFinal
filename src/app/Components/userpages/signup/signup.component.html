@@ -1,0 +1,124 @@
+<div class="h-100 bg-premium-dark">
+  <div class="d-flex h-100 justify-content-center align-items-center">
+    <div class="mx-auto app-login-box col-md-8">
+      <!-- <div class="app-logo-inverse mx-auto mb-3"></div> -->
+      <form [formGroup]="usersignupForm">
+      <div class="modal-dialog w-100">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h5 class="modal-title">
+              <h4 class="mt-2">
+                <div>Welcome,</div>
+                <!-- <span>It only takes a <span class="text-success">few seconds</span> to create your account</span> -->
+              </h4>
+            </h5>
+            <div class="divider"></div>
+            <div id="exampleInputGroup12" role="group" class="form-group">
+              <div>
+                <select id="exampleInput12" class="form-control" formControlName="usertype"  aria-required="true">
+								<option value="opt1" disabled selected>-- Select User-Type --</option>
+								<option value="1">Transporter</option>
+								<option value="2">Manufacturer</option>
+							  </select>	
+              </div>
+            </div>
+            <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_"
+                 class="form-group">
+              <div><input id="exampleInput1" type="email" placeholder="Enter email *" required="required"
+                          aria-required="true" class="form-control"
+                          aria-describedby="exampleInputGroup1__BV_description_" formControlName="email">
+              </div>
+              <p class="messages text-danger" *ngIf="usersignupForm.controls.email.errors?.pattern">
+                Enter Correct Mail!</p>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div id="exampleInputGroup12" role="group" class="form-group">
+                  <div><input id="exampleInput12" type="text" placeholder="Enter username *" required="required"
+                              aria-required="true" class="form-control" formControlName="username"></div>
+                              <p class="messages text-danger" *ngIf="usersignupForm.controls.username.errors?.pattern">
+                              Text Only Accepts!..</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div id="exampleInputGroup12" role="group" class="form-group">
+                  <div><input id="exampleInput12" type="text" placeholder="Enter mobileno *" required="required"
+                              aria-required="true" class="form-control" formControlName="mobileno" maxlength="10"></div>
+                              <p class="messages text-danger" *ngIf="usersignupForm.controls.mobileno.errors?.pattern">
+                                Numbers Only Accepts!..</p>
+                </div>
+              </div>
+            </div>
+            <div id="exampleInputGroup12" role="group" class="form-group">
+              <div>
+                <select id="exampleInput12" class="form-control" formControlName="country" (change)="GetState($event.target.value)" aria-required="true">
+								<option value="opt1" disabled selected>-- Select Country --</option>
+								<option *ngFor="let val of countrylist" value="{{val.CountryID}}">{{val.CountryName}}</option>
+							  </select>	
+              </div>
+            </div>
+            <div id="exampleInputGroup12" role="group" class="form-group">
+              <div>
+                <select id="exampleInput12" class="form-control" formControlName="state" (change)="GetCity($event.target.value)" aria-required="true">
+								<option value="opt1" disabled selected>-- Select State--</option>
+								<option *ngFor="let val of statelist" value="{{val.StateID}}">{{val.StateName}}</option>
+							  </select>	
+              </div>
+            </div>
+            <div id="exampleInputGroup12" role="group" class="form-group">
+              <div>
+                <select id="exampleInput12" class="form-control" formControlName="city"  aria-required="true">
+								<option value="opt1" disabled selected>-- Select City--</option>
+								<option *ngFor="let val of citylist" value="{{val.CityID}}">{{val.CityName}}</option>
+							  </select>	
+              </div>
+            </div>
+            <div id="exampleInputGroup12" role="group" class="form-group">
+              <div><input id="exampleInput12" type="text" placeholder="Enter Address *" required="required"
+                          aria-required="true" class="form-control" formControlName="address"></div>
+            </div>
+            <div id="exampleInputGroup12" role="group" class="form-group">
+              <div><input id="exampleInput12" type="text" placeholder="Enter Town *" required="required"
+                          aria-required="true" class="form-control" formControlName="town"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div id="exampleInputGroup2" role="group" class="form-group">
+                  <div><input id="exampleInput2" type="password" placeholder="Enter password *" required="required"
+                              aria-required="true" class="form-control" formControlName="password"></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div id="exampleInputGroup2" role="group" class="form-group">
+                  <div><input id="exampleInput2" type="text" placeholder="Repeat password *" required="required"
+                              aria-required="true" class="form-control" formControlName="confirmpassword"></div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="custom-control custom-checkbox"><input id="exampleCheck" type="checkbox" name="check"
+                                                               autocomplete="off" class="custom-control-input"
+                                                               value="true"><label for="exampleCheck"
+                                                                                   class="custom-control-label">
+              Accept our <a [routerLink]="">Terms and Conditions</a>.
+            </label></div>
+            <div class="divider"></div> -->
+            <h6 class="mb-0">
+              Already have an account?
+              <a [routerLink]="['/pages/login']" class="text-primary">Sign in</a>
+              |
+              <a [routerLink]="['/pages/forgot-password-boxed']" class="text-primary">Recover
+                Password</a></h6></div>
+          <div class="modal-footer d-block text-center">
+            <button  type="button" (click)="Signup()" [disabled]="!usersignupForm.valid"
+                    class="btn btn-primary btn-lg disable">Create Account
+            </button>
+          </div>
+        </div>
+      </div>
+      </form>
+      <!-- <div class="text-center text-white opacity-8 mt-3">
+        Copyright © ArchitectUI 2019
+      </div> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="main-card mb-3 card">
+  <div class="card-body py-3">
+    <div class="sub-title">Add Vehicle Details
+      <em class="fa fa-truck ficon"></em>
+    </div><br>
+    <form [formGroup]="vehicleregisterForm">
+      <div class="row">
+        <div class="col-lg-4">
+          <label class="form-label">Vehicle Name *</label>
+          <div id="exampleInputGroup12" role="group" class="form-group">
+            <div>
+              <input id="exampleInput12" type="text" placeholder="Enter Vehicle Name..." required="required"
+                        aria-required="true" class="form-control" formControlName="vehiclename"></div>
+                        <p class="messages text-danger" *ngIf="vehicleregisterForm.controls.vehiclename.errors?.pattern">
+                          Text Only Accepts!..</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <label class="form-label">Vehicle Type *</label>
+          <div id="exampleInputGroup12" role="group" class="form-group">
+            <div> 
+              <select id="exampleInput12" class="form-control" formControlName="vehicletype"  aria-required="true">
+              <option value="opt1" disabled selected>-- Select Vehicle Type --</option>
+              <option value="Tata ACE">Tata ACE</option>
+              <option value="Eicher">Eicher</option>
+              <option value="Lorry">Lorry</option>
+              <option value="Taurus">Taurus</option>
+              <option value="Tanker Based">Tanker Based</option>
+              <option value="Container Based">Container Based</option>
+              </select>	
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <label class="form-label">Vehicle No *</label>
+          <div id="exampleInputGroup12" role="group" class="form-group">
+            <div><input id="exampleInput12" type="text" placeholder="Enter Vehicle No..." required="required" aria-required="true" 
+              onkeyup="this.value = this.value.toUpperCase();" class="form-control" formControlName="vehicleno"></div>
+              <p class="messages text-danger" *ngIf="vehicleregisterForm.controls.vehicleno.errors?.pattern">
+                Alpha Numeric Only Accepts!..</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <label class="form-label">Maximum Capacity *</label>
+          <div id="exampleInputGroup12" role="group" class="form-group">
+            <div>
+              <input id="exampleInput12" type="text" placeholder="Enter Capcity..." required="required"
+                        aria-required="true" class="form-control" formControlName="capacity"></div>
+          </div>
+      </div>
+      <div class="col-lg-4">
+        <label class="form-label">Basic Fare per/KM *</label>
+        <div id="exampleInputGroup12" role="group" class="form-group">
+          <div>
+            <input id="exampleInput12" type="text" placeholder="Enter Amount..." required="required"
+                      aria-required="true" class="form-control" formControlName="basicfare"></div>
+                      <p class="messages text-danger" *ngIf="vehicleregisterForm.controls.basicfare.errors?.pattern">
+                        Numbers Only Accepts!..</p>
+        </div>
+      </div>
+      </div>
+      <div class="container">
+        <div class="mr-2" align="right">
+          <em class="fa fa-plus text-primary" style="font-weight: bold;cursor: pointer;" (click)="insertnewrow()">New Description</em>
+        </div><br>
+        <div class="flow" style="overflow:auto;" formArrayName="vehicleDetails">
+          <table aria-describedby="mydesc" class="table styletab">
+              <thead class="stylehead">
+              <tr>
+                <th>S.No</th>
+                <th>ADD Description</th>
+                <th>Remove</th>
+              </tr>
+              </thead>
+              <tbody class="stylebody">
+                <tr *ngFor="let vehicle of vehicleregisterForm.controls.vehicleDetails.controls; let i = index"
+                [formGroupName]="i">
+                  <td><input value={{i+1}} readonly id="width1"/></td>
+                  <td><input type="text" formControlName="description" id="width3"/></td>
+                  <td><em class="fa fa-trash text-secondary" id="width1" style="cursor:pointer" (click)="removerow(i)"></em></td>
+                </tr>
+                <tr>
+                  <td><input type="text" readonly id="width1"/></td>
+                  <td><input type="text" readonly id="width3"/></td>
+                  <td><em></em></td>
+                </tr>
+              </tbody>
+          </table>
+        </div><br><br>
+        <button class="btn btn-primary btn-lg disable" [disabled]="!vehicleregisterForm.valid" (click)="onsubmit()">Register</button><br><br>
+      </div>
+    </form>
+  </div>
+</div>

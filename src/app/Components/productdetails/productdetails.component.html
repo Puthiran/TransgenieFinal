@@ -1,0 +1,175 @@
+<style>
+  .prodstatus{
+    padding:4px 15px;
+    color:white;
+    border-radius:11px;
+}
+</style>
+<div class="main-card mb-3 card">
+  <div class="card-body py-3">
+    <div class="container dt-responsive" style="overflow: auto;" align="center">
+      <table id="drug_table" class="table table-striped table-bordered full-data-table" aria-describedby="mydesc">
+        <thead>
+          <tr class="tr_header">
+            <th scope="col">S.No</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Type</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Source</th>
+            <th scope="col">Desination</th>
+            <th scope="col">Status</th>
+            <th scope="col">Remarks</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="(productdetails) == 0">
+            <td></td>
+            <td></td>
+            <td class="nodata">No Data Available</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr><!-- | category : searchText  dataFilter:filterQuery:filterQuery1:filterQuery2- | paginate: { id: 'listing_pagination',
+            itemsPerPage: size, currentPage: page }-->
+          <tr *ngFor="let item of productdetails; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{item.productname}}</td>
+            <td>{{item.producttype}}</td>
+            <td>{{item.weight}}</td>
+            <td>{{item.source}}</td>
+            <td>{{item.destination}}</td>
+            <td><label class="prodstatus" [style.background-color]="item.productstatus==1?'gray':item.productstatus==2?'orangered':item.productstatus==3?'brown':item.productstatus==4?'green':'#033C73'">
+            {{item.productstatus==1?'Created':item.productstatus==2?'Posted':item.productstatus==3?'Reject by Tranposrter':item.productstatus==4?'Accept by Transporter':'Delivered'}}</label></td>
+            <td>{{item.remarks}}</td>
+            <td style="text-align: center;">
+              <div class="btn-group" ngbDropdown placement="bottom-right">
+                <button type="button" class="btn btn-link p-0 mr-2" ngbDropdownToggle></button>
+                <div ngbDropdownMenu>
+                  <button class="dropdown-item" style="cursor: pointer;" *ngIf="item.productstatus<4" (click)="getAvailVehicles(item.productid,item.productname)">Avail Vehicle Details</button>
+                  <button class="dropdown-item" style="cursor: pointer;" *ngIf="item.productstatus>2" (click)="getpickedtransdetails(item.transportid)">Picked Transport Details</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <!-- <tfoot>
+          <tr>
+            <td colspan="9">
+              <pagination-controls id="listing_pagination" directionLinks="true"
+                (pageChange)="page = $event" (pageChange)="pagechange(page = $event)" style="float: right;"></pagination-controls>
+            </td>
+          </tr>
+        </tfoot> -->
+      </table>
+    </div><br>
+  </div>
+</div>
+
+  <div class="mx-2" [ngClass]="Vehicleflag?'showtop1':'hidetop'">
+      <br>
+      <div class="mr-2" align="right">
+        <em class="fa fa-close fa-2x mr-2" (click)="Vehicleflag=false" style="cursor:pointer;color: white;padding-right: 6em;"></em>
+      </div><br>
+      <div class="container dt-responsive py-3" style="overflow: auto;background-color: white;border-radius:12px;" align="center">
+        <br>
+        <div id="exampleInputGroup12" role="group" class="form-group" align="right">
+          <div> 
+            <select id="exampleInput12" style="width:380px" class="form-control"  aria-required="true" (change)="filtervehicle($event.target.value)">
+            <option value="opt1" disabled selected>-- Filter by Vehicle Type --</option>
+            <option value="All">All Vehicles</option>
+            <option value="Tata ACE">Tata ACE</option>
+            <option value="Eicher">Eicher</option>
+            <option value="Lorry">Lorry</option>
+            <option value="Taurus">Taurus</option>
+            <option value="Tanker Based">Tanker Based</option>
+            <option value="Container Based">Container Based</option>
+            </select>	
+          </div>
+        </div><br>
+        <table id="drug_table" class="table table-striped table-bordered full-data-table" aria-describedby="mydesc">
+          <thead>
+            <tr class="tr_header">
+              <th scope="col">S.No</th>
+              <th scope="col">Vehicle Name</th>
+              <th scope="col">Vehicle No</th>
+              <th scope="col">Vehicle Type</th>
+              <th scope="col">Capacity</th>
+              <th scope="col">Basic Fare per/KM</th>
+              <th scope="col">Full Details</th>
+              <th scope="col">Accept/Select</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="(vehicledetails) == 0">
+              <td></td>
+              <td class="nodata">No Data Available</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr><!-- | category : searchText  dataFilter:filterQuery:filterQuery1:filterQuery2- | paginate: { id: 'listing_pagination',
+              itemsPerPage: size, currentPage: page }-->
+            <tr *ngFor="let item of vehicledetails; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{item.vehiclename}}</td>
+              <td>{{item.vehicleno}}</td>
+              <td>{{item.vehicletype}}</td>
+              <td>{{item.capacity}}</td>
+              <td>{{item.basicfare}}</td>
+              <td style="text-align: center;cursor: pointer;"><em class="fa fa-file" (click)="fulldetails(item.vehicleid)"></em></td>
+              <td style="text-align: center;cursor: pointer;"><em class="fa fa-check text-success" (click)="acceptvehicle(item.vehicleid,item.userid)"></em></td>
+            </tr>
+          </tbody>
+          <!-- <tfoot>
+            <tr>
+              <td colspan="9">
+                <pagination-controls id="listing_pagination" directionLinks="true"
+                  (pageChange)="page = $event" (pageChange)="pagechange(page = $event)" style="float: right;"></pagination-controls>
+              </td>
+            </tr>
+          </tfoot> -->
+        </table>
+      </div><br>
+  </div>
+
+
+  <div class="mx-2" [ngClass]="fulldetailsflag?'sidenavshow':'sidenavhide'">
+    <br>
+    <div class="mr-2" align="right">
+      <em class="fa fa-close fa-2x mr-2" (click)="fulldetailsflag=false" style="cursor:pointer;color: white;padding-right:1em;"></em>
+    </div><br>
+    <div class="container dt-responsive py-3 mx-1" *ngIf="fulldetailsflag"
+    style="overflow: auto;background-color: white;border-radius:12px;">
+      <br>
+      <h5>{{vehicledescdetails[0].username}}</h5>
+      <label>Email: <span style="font-weight:bold">{{vehicledescdetails[0].email}}</span></label><br>
+      <label>Mobile: <span style="font-weight:bold">{{vehicledescdetails[0].mobileno}}</span></label><br><br>
+      <label style="font-weight: bold;">Vehicle Details: </label><br>
+      <ol style="font-size: 16px;font-family: Montserrat;">
+        <li *ngFor="let item of vehicledescdetails  let i = index">{{item.description}}</li>
+      </ol> 
+    </div><br>
+  </div>
+
+  <div class="mx-2" [ngClass]="transportflag?'sidenavshow':'sidenavhide'">
+    <br>
+    <div class="mr-2" align="right">
+      <em class="fa fa-close fa-2x mr-2" (click)="transportflag=false" style="cursor:pointer;color: white;padding-right:1em;"></em>
+    </div><br>
+    <div class="container dt-responsive py-3 mx-1" *ngIf="transportflag"
+    style="overflow: auto;background-color: white;border-radius:12px;">
+      <br>
+      <h5>{{transportdetails.username}}</h5>
+      <label>Email: <span style="font-weight:bold">{{transportdetails.email}}</span></label><br>
+      <label>Mobile: <span style="font-weight:bold">{{transportdetails.mobileno}}</span></label><br>
+      <label>Address: <span style="font-weight:bold">{{transportdetails.address}},{{transportdetails.town}}</span></label><br><br>
+    </div><br>
+  </div>
+
+

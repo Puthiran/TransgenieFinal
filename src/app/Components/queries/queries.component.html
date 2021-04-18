@@ -1,0 +1,75 @@
+<style>
+  .prodstatus{
+    padding:4px 15px;
+    color:white;
+    border-radius:11px;
+}
+</style>
+<div class="main-card mb-3 card">
+  <div class="card-body py-3">
+    <div class="container dt-responsive" style="overflow: auto;" align="center">
+      <table id="drug_table" class="table table-striped table-bordered full-data-table" aria-describedby="mydesc">
+        <thead>
+          <tr class="tr_header">
+            <th scope="col">S.No</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Type</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Source</th>
+            <th scope="col">Desination</th>
+            <th scope="col">Remarks</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="(productdetails) == 0">
+            <td></td>
+            <td></td>
+            <td class="nodata">No Data Available</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr *ngFor="let item of productdetails  let i = index">
+            <td>{{i+1}}</td>
+            <td>{{item.productname}}</td>
+            <td>{{item.producttype}}</td>
+            <td>{{item.weight}}</td>
+            <td>{{item.source}}</td>
+            <td>{{item.destination}}</td>
+            <td>{{item.remarks}}</td>
+            <td style="text-align: center;">
+              <div class="btn-group" ngbDropdown placement="bottom-right">
+                <button type="button" class="btn btn-link p-0 mr-2" ngbDropdownToggle></button>
+                <div ngbDropdownMenu>
+                  <button class="dropdown-item" style="cursor: pointer;" (click)="getmanufacturedetails(item)">
+                    <em class="fa fa-file mr-2"></em>Manufacture Details</button>
+                  <button class="dropdown-item" style="cursor: pointer;" (click)="updateproductstatus(item.productid,item.vehicleid,4,0)">
+                  <em class="fa fa-check text-success mr-2"></em>Accept</button>
+                  <button class="dropdown-item" style="cursor: pointer;" (click)="updateproductstatus(item.productid,item.vehicleid,3,1)">
+                  <em class="fa fa-close text-danger mr-2"></em>Reject</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><br>
+  </div>
+</div>
+
+<div class="mx-2" [ngClass]="manufactureflag?'sidenavshow':'sidenavhide'">
+  <br>
+  <div class="mr-2" align="right">
+    <em class="fa fa-close fa-2x mr-2" (click)="manufactureflag=false" style="cursor:pointer;color: white;padding-right:1em;"></em>
+  </div><br>
+  <div class="container dt-responsive py-3 mx-1" *ngIf="manufactureflag"
+  style="overflow: auto;background-color: white;border-radius:12px;">
+    <br>
+    <h5>{{manuname}}</h5>
+    <label>Email: <span style="font-weight:bold">{{manuemail}}</span></label><br>
+    <label>Mobile: <span style="font-weight:bold">{{manumobile}}</span></label><br><br>
+  </div><br>
+</div>

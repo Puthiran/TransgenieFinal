@@ -1,0 +1,62 @@
+<div class="main-card mb-3 card">
+  <div class="card-body py-3">
+    <div class="sub-title">Add Product Details
+      <em class="fa fa-truck ficon"></em>
+    </div><br>
+    <form [formGroup]="producteregisterForm">
+      <div class="row">
+        <div class="col-lg-4">
+          <label class="form-label">Product Name *</label>
+          <div id="exampleInputGroup12" role="group" class="form-group">
+            <div>
+              <input id="exampleInput12" type="text" placeholder="Enter Product Name..." required="required"
+                        aria-required="true" class="form-control" formControlName="productname"></div>
+                        <p class="messages text-danger" *ngIf="producteregisterForm.controls.productname.errors?.pattern">
+                          Text Only Accepts!..</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <label class="form-label">Product Type *</label>
+          <div id="exampleInputGroup12" role="group" class="form-group">
+            <div>
+              <input id="exampleInput12" type="text" placeholder="Enter Product Type..." required="required"
+                        aria-required="true" class="form-control" formControlName="producttype"></div>
+                        <p class="messages text-danger" *ngIf="producteregisterForm.controls.producttype.errors?.pattern">
+                          Text Only Accepts!..</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <label class="form-label">Weight *</label>
+          <div id="exampleInputGroup12" role="group" class="form-group">
+            <div><input id="exampleInput12" type="text" placeholder="Enter Weight..." required="required"
+                        aria-required="true" class="form-control" formControlName="weight"></div>
+                        <p class="messages text-danger" *ngIf="producteregisterForm.controls.weight.errors?.pattern">
+                        Alpha Nemueric Only Accepts!..</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <label class="form-label">Pickup Point *</label>
+          <div id="exampleInputGroup12" role="group" class="form-group">
+            <div>
+              <textarea rows="2" cols="50" class="form-control" formControlName="source"></textarea></div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <label class="form-label">Drop Point *</label>
+          <div id="exampleInputGroup12" role="group" class="form-group">
+            <div>
+              <textarea rows="2" cols="50" class="form-control" formControlName="destination"></textarea></div>
+          </div>
+        </div><br>
+        <div class="col-lg-4">
+          <label class="form-label">Remarks</label>
+          <div id="exampleInputGroup12" role="group" class="form-group">
+            <div>
+              <textarea rows="2" cols="50" class="form-control" formControlName="remarks"></textarea></div>
+          </div>
+        </div>
+      </div><br>
+      <button class="btn btn-primary btn-lg" (click)="onsubmit()" [disabled]="!producteregisterForm.valid">Register</button><br><br>
+    </form>
+  </div>
+</div>

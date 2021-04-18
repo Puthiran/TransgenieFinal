@@ -1,0 +1,130 @@
+@import "assets/base";
+
+.disable:disabled{
+    opacity: 0.5;
+}
+
+.showtop {
+    height: 100%;
+    width: 100%;
+    top:0px;
+    left:0px;
+    position: absolute;
+    z-index: 1;
+    background-color:rgba(0,0,0,0.3);
+    font-family: Montserrat;
+    overflow-x: auto;
+    overflow-y: hidden;  
+}
+
+.showtop1 {
+    height: 100%;
+    width: 100%;
+    top:4.3em;
+    left: 8em;
+    position: absolute;
+    z-index: 1;
+    background-color:rgba(0,0,0,0.3);
+    font-family: Montserrat;
+    overflow-x: auto;
+    overflow-y: hidden;  
+}
+  
+.hidetop {
+    display: none;
+}
+
+.sidenavshow {
+    height: 100%;
+    width: 420px;
+    position: absolute;
+    top:4.3em;
+    right:8px;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.3); 
+    /* #FDFDFD; */
+    font-family: Montserrat;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: 0.5s;
+    padding-top:10px;
+  }
+  
+  .sidenavhide {
+    display: none;
+  }
+
+.sub-title {
+    border-bottom: 1px solid grey;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+   /* text-transform: uppercase;  rgba(204, 204, 204, 0.35); */  /* sankar */
+    font-family:Montserrat;
+    font-style:italic;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.ficon{
+    font-size:31px !important;
+    float:right;
+}
+
+.flow{
+    overflow-x:auto;
+    overflow-y:auto;
+    border:2px solid #b3b3b3;
+    border-radius:5px;
+    max-height:320px;  
+}
+  
+.styletab{
+    border:1px solid #e0e0e0 !important;
+}
+   
+.stylehead{
+    background-color:#dcdcdc !important;
+    font-weight:bold;
+}
+    
+.stylehead th{
+    border:1px solid #b3b3b3;
+    text-align:center !important;
+    font-family:Montserrat;
+    font-size:18px !important;
+    font-weight:bold !important;
+    padding:0.3em;
+}
+   
+.stylebody td{
+    border-right:1px solid #dcdcdc;
+    border-top: 1px solid #dcdcdc !important;
+    font-family:Montserrat;
+    text-align:center !important;
+    font-size:18px;
+    padding:0.3em !important;
+    vertical-align: middle;
+    width:120px;
+}
+  
+.stylebody td input{
+      text-align:center;
+      border:none;
+      width:120px;
+      vertical-align: middle;
+      font-size:18px;
+}
+
+#width1{
+    width:70px;
+}
+
+#width2{
+    width:210px;
+}
+
+#width3{
+    width:570px;
+}
+  
+  
